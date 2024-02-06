@@ -19,6 +19,7 @@ namespace MathematicsConsole
             AreArgumentsValid(args);
 
             var math = new BasicMath();
+            var advmath = new AdvMath();
             switch (_operand)
             {
                 case "add":
@@ -37,8 +38,25 @@ namespace MathematicsConsole
                     Console.WriteLine($"{_num1} / {_num2} = {math.DivideNumbers(_num1, _num2)}");
                     break;
 
+                case "are":
+                    Console.WriteLine($"{_num1} * {_num2} = {advmath.CalculateArea(_num1, _num2)}");
+                    break;
+
+                case "avg":
+                    Console.WriteLine($"Average: {advmath.CalculateAverage(new List<double> { _num1, _num2 })}");
+                    break;
+
+                case "sqr":
+                    Console.WriteLine($"{_num1} ^ 2 = {advmath.CalculateSquared(_num1)}");
+                    break;
+
+                case "pyt":
+                    Console.WriteLine($"Hypotenuse: {advmath.CalculatePT(_num1, _num2)}");
+                    break;
+
+
                 default:
-                    Console.WriteLine($"{_operand} is not a valid operator. Please enter Add, Sub, Mul or Div");
+                    Console.WriteLine($"{_operand} is not a valid operator. Please enter Add, Sub, Mul, Div, Sqr");
                     break;
             }
             Console.ReadLine();
@@ -48,9 +66,15 @@ namespace MathematicsConsole
         {
             _operand = args[1].ToLower();
             _num1 = NumParser(args[2]);
-            _num2 = NumParser(args[3]);
+            if (args.Length >= 4)
+            {
+                _num2 = NumParser(args[3]);
+            }
+            else
+            {
+                _num2 = 0;
+            }
             Console.WriteLine("All Arguments are valid!");
-            //Console.ReadLine();
         }
 
             public static double NumParser(string arg)
